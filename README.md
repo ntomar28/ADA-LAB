@@ -1,0 +1,89 @@
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+using namespace std;
+// Function to print an array
+void printArray(vector<int>& arr) {
+    for (int num : arr) {
+        cout << num << " ";
+    }
+    cout << endl;
+}
+// Bubble Sort Implementation
+int bubbleSort(vector<int>& arr) {
+    int n = arr.size();
+    int stepCount = 0;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            stepCount++; // Comparison
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+                stepCount++; // Swap operation
+            }
+        }
+    }
+    return stepCount;
+}
+// Selection Sort Implementation
+int selectionSort(vector<int>& arr) {
+    int n = arr.size();
+    int stepCount = 0;
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            stepCount++; // Comparison
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+        stepCount++; // Swap operation
+    }
+    return stepCount;
+}
+// Insertion Sort Implementation
+int insertionSort(vector<int>& arr) {
+    int n = arr.size();
+    int stepCount = 0;
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        stepCount++; // Assignment
+        while (j >= 0 && arr[j] > key) {
+            stepCount++; // Comparison
+            arr[j + 1] = arr[j];
+            j--;
+            stepCount++; // Assignment
+        }
+        arr[j + 1] = key;
+        stepCount++; // Assignment
+    }
+    return stepCount;
+}
+int main() {
+    vector<int> arr = {35, 12, 48, 7, 22};
+    vector<int> arrBubble = arr;
+    vector<int> arrSelection = arr;
+    vector<int> arrInsertion = arr;
+    cout << "Original Array: ";
+    printArray(arr);
+    
+    // Bubble Sort Execution
+    int bubbleSteps = bubbleSort(arrBubble);
+    cout << "Bubble Sort (Ascending): ";
+    printArray(arrBubble);
+    cout << "Step Count: " << bubbleSteps << endl;
+    
+    // Selection Sort Execution
+    int selectionSteps = selectionSort(arrSelection);
+    cout << "Selection Sort (Ascending): ";
+    printArray(arrSelection);
+    cout << "Step Count: " << selectionSteps << endl;
+    
+    // Insertion Sort Execution
+    int insertionSteps = insertionSort(arrInsertion);
+    cout << "Insertion Sort (Ascending): ";
+    printArray(arrInsertion);
+    cout << "Step Count: " << insertionSteps << endl;
+    return 0;
+}
